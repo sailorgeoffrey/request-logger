@@ -28,7 +28,11 @@ type logHandler struct {
 }
 
 func (logHandler) ServeHTTP(w http.ResponseWriter, req *http.Request) {
-	body,_ := ioutil.ReadAll(req.Body)
-	fmt.Println(req)
-	fmt.Println(string(body))
+	if req.URL.Path == "/__health" {
+		w.WriteHeader(200)
+	} else {
+		body, _ := ioutil.ReadAll(req.Body)
+		fmt.Println(req)
+		fmt.Println(string(body))
+	}
 }
