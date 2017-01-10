@@ -2,7 +2,6 @@ package main
 
 import (
 	"os"
-	"fmt"
 	"net/http"
 	"log"
 	"time"
@@ -32,7 +31,8 @@ func (logHandler) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 		w.WriteHeader(200)
 	} else {
 		body, _ := ioutil.ReadAll(req.Body)
-		fmt.Println(req)
-		fmt.Println(string(body))
+		log.Print("Request: ", req)
+		log.Print("Headers: ", req.Header)
+		log.Print("Body: ", string(body))
 	}
 }
